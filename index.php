@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -149,8 +150,10 @@
                         <div class="card-body text-center">
                             <h5 class="card-title">Deux colliers fins</h5>
                             <p class="text-gold fw-bold">500 DT</p>
-                            <a href="produit.php?id=14" class="btn btn-outline-dark btn-sm rounded-pill me-2">Voir plus</a>
-                            <button class="btn btn-dark btn-sm rounded-pill">Ajouter</button>
+                            <form method="POST" action="ajouter_panier.php" class="d-inline">
+                                <input type="hidden" name="id_produit" value="14">
+                                <button type="submit" class="btn btn-dark btn-sm rounded-pill"><i class="bi bi-cart-plus"></i> Ajouter</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -160,8 +163,10 @@
                         <div class="card-body text-center">
                             <h5 class="card-title">Collier Argent</h5>
                             <p class="text-gold fw-bold">98 DT</p>
-                            <a href="produit.php?id=15" class="btn btn-outline-dark btn-sm rounded-pill me-2">Voir plus</a>
-                            <button class="btn btn-dark btn-sm rounded-pill">Ajouter</button>
+                            <form method="POST" action="ajouter_panier.php" class="d-inline">
+                                <input type="hidden" name="id_produit" value="15">
+                                <button type="submit" class="btn btn-dark btn-sm rounded-pill"><i class="bi bi-cart-plus"></i> Ajouter</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -171,8 +176,10 @@
                         <div class="card-body text-center">
                             <h5 class="card-title">Bracelet Rihana</h5>
                             <p class="text-gold fw-bold">40 DT</p>
-                            <a href="produit.php?id=16" class="btn btn-outline-dark btn-sm rounded-pill me-2">Voir plus</a>
-                            <button class="btn btn-dark btn-sm rounded-pill">Ajouter</button>
+                            <form method="POST" action="ajouter_panier.php" class="d-inline">
+                                <input type="hidden" name="id_produit" value="16">
+                                <button type="submit" class="btn btn-dark btn-sm rounded-pill"><i class="bi bi-cart-plus"></i> Ajouter</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -182,11 +189,19 @@
                         <div class="card-body text-center">
                             <h5 class="card-title">Boucles Perles Bleu</h5>
                             <p class="text-gold fw-bold">120 DT</p>
-                            <a href="produit.php?id=19" class="btn btn-outline-dark btn-sm rounded-pill me-2">Voir plus</a>
-                            <button class="btn btn-dark btn-sm rounded-pill">Ajouter</button>
+                            <form method="POST" action="ajouter_panier.php" class="d-inline">
+                                <input type="hidden" name="id_produit" value="19">
+                                <button type="submit" class="btn btn-dark btn-sm rounded-pill"><i class="bi bi-cart-plus"></i> Ajouter</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- Bouton Voir tous les produits -->
+            <div class="text-center mt-5">
+                <a href="produit.php" class="btn btn-lg rounded-pill px-5 py-3" style="background-color:#c5a059;color:#fff;font-weight:600;letter-spacing:1px;">
+                    <i class="bi bi-grid me-2"></i>Voir tous les produits
+                </a>
             </div>
         </div>
     </section>

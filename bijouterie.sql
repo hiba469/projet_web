@@ -149,10 +149,10 @@ ALTER TABLE `panier`
 --
 
 INSERT INTO `produit` (`id`, `nom`, `description`, `prix`, `image`, `categorie`) VALUES
-(1, 'Bague Aurore', 'Or blanc 18 carats e', 1, 'https://www.marc-orian.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw', 1),
-(2, 'Alliance Éclat', 'Anneau en or jaune b', 950, 'https://img.edenly.com/pt/100/atelier-20492-alliance-4-mm-or-jaune-brosse-18-carats-r__20492_1.webp', 1),
-(3, 'Solitaire Éternité', 'Diamant pur sur mont', 4500, 'https://images.unsplash.com/photo-1768423685978-42fe24ec39a0?q=80&w=880&auto=format&fit=crop&ixlib=r', 1),
-(4, 'Collier Goutte', 'Pendentif cristal et', 350, 'https://storage.gra.cloud.ovh.net/v1/AUTH_ca60d77ddd5e42749d7c4c17f753540d/ugm-data/pictures/bijouca', 2),
+(1, 'Bague Aurore', 'Or blanc 18 carats e', 89, 'https://www.marc-orian.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw', 1),
+(2, 'Alliance Éclat', 'Anneau en or jaune b', 189, 'https://img.edenly.com/pt/100/atelier-20492-alliance-4-mm-or-jaune-brosse-18-carats-r__20492_1.webp', 1),
+(3, 'Solitaire Éternité', 'Diamant pur sur mont', 299, 'https://images.unsplash.com/photo-1768423685978-42fe24ec39a0?q=80&w=880&auto=format&fit=crop&ixlib=r', 1),
+(4, 'Collier Goutte', 'Pendentif cristal et', 159, 'https://storage.gra.cloud.ovh.net/v1/AUTH_ca60d77ddd5e42749d7c4c17f753540d/ugm-data/pictures/bijouca', 2),
 (5, 'Sautoir Majesté', 'Perles de culture et', 200, 'https://images.bibelotandco.fr/uploads/images/collier-fausse-perles-de-culture-en-chute-fermoir-meta', 2),
 (6, 'Pendentif Cœur', 'Médaille gravée en o', 750, 'https://www.aismee.fr/bibliotheque/775/medaillon-coeur-photo-or-detail-780-1.jpg', 2),
 (7, 'Jonc Infini ', 'Bracelet rigide en o', 850, 'https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_1.0,f_auto,w_375/567', 3),
