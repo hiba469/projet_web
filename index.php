@@ -29,7 +29,6 @@
             font-family: 'Playfair Display', serif; 
         }
 
-        /* Menu avec effet after */
         .navbar-nav .nav-link {
             position: relative;
             padding-bottom: 5px;
@@ -146,7 +145,7 @@
                             <p class="text-gold fw-bold">500 DT</p>
                             <form method="POST" action="ajouter_panier.php" class="d-inline">
                                 <input type="hidden" name="id_produit" value="14">
-                                <button type="submit" class="btn btn-dark btn-sm rounded-pill"><i class="bi bi-cart-plus"></i> Ajouter</button>
+                                <button type="submit" class="btn btn-dark btn-sm rounded-pill"> Ajouter</button>
                             </form>
                         </div>
                     </div>
@@ -159,7 +158,7 @@
                             <p class="text-gold fw-bold">98 DT</p>
                             <form method="POST" action="ajouter_panier.php" class="d-inline">
                                 <input type="hidden" name="id_produit" value="15">
-                                <button type="submit" class="btn btn-dark btn-sm rounded-pill"><i class="bi bi-cart-plus"></i> Ajouter</button>
+                                <button type="submit" class="btn btn-dark btn-sm rounded-pill">Ajouter</button>
                             </form>
                         </div>
                     </div>
@@ -172,7 +171,7 @@
                             <p class="text-gold fw-bold">40 DT</p>
                             <form method="POST" action="ajouter_panier.php" class="d-inline">
                                 <input type="hidden" name="id_produit" value="16">
-                                <button type="submit" class="btn btn-dark btn-sm rounded-pill"><i class="bi bi-cart-plus"></i> Ajouter</button>
+                                <button type="submit" class="btn btn-dark btn-sm rounded-pill">Ajouter</button>
                             </form>
                         </div>
                     </div>
@@ -185,7 +184,7 @@
                             <p class="text-gold fw-bold">120 DT</p>
                             <form method="POST" action="ajouter_panier.php" class="d-inline">
                                 <input type="hidden" name="id_produit" value="19">
-                                <button type="submit" class="btn btn-dark btn-sm rounded-pill"><i class="bi bi-cart-plus"></i> Ajouter</button>
+                                <button type="submit" class="btn btn-dark btn-sm rounded-pill">Ajouter</button>
                             </form>
                         </div>
                     </div>

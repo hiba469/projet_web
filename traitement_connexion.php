@@ -1,5 +1,4 @@
 <?php
-// changer name champs et les nom de tables 
 session_start();
 require_once "config.php";
 if($_SERVER["REQUEST_METHOD"] === "POST")
@@ -20,7 +19,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 		</strong>';
 		
 	}
-	//tab asso qui contient les info du user connecte
 	$data = mysqli_fetch_assoc($res); 
 	$_SESSION['user'] = $data;
 	header("location:produit.php");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 06, 2026 at 06:31 PM
+-- Generation Time: May 06, 2026 at 10:53 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 --
 
 INSERT INTO `client` (`id`, `nom`, `prenom`, `email`, `password`, `telephone`, `adresse`) VALUES
-(1, 'Ben Salah', 'Mohammed', 'Mohamed@gmail.com', '123', '123456789', 'aaabbbccc'),
+(1, 'Ben Salah', 'Mohammed', 'Mohamed@gmail.com', '123', '123456789', 'aaabbbcccdddee'),
 (3, 'Ben Ammar', 'Syrine', 'Syrine@gmail.com', '456', '12123123', 'aaabbbcccddd');
 
 -- --------------------------------------------------------
@@ -85,7 +85,14 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `montant` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id_commande`),
   KEY `id_client` (`id_client`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `commande`
+--
+
+INSERT INTO `commande` (`id_commande`, `id_client`, `date`, `montant`) VALUES
+(1, 1, '2026-05-06', 600);
 
 -- --------------------------------------------------------
 
@@ -101,7 +108,16 @@ CREATE TABLE IF NOT EXISTS `ligne_commande` (
   PRIMARY KEY (`id_ligne`),
   KEY `id_produit` (`id_produit`),
   KEY `id_commande` (`id_commande`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `ligne_commande`
+--
+
+INSERT INTO `ligne_commande` (`id_ligne`, `id_commande`, `id_produit`) VALUES
+(1, 1, 5),
+(2, 1, 5),
+(3, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -118,7 +134,16 @@ CREATE TABLE IF NOT EXISTS `panier` (
   PRIMARY KEY (`id_panier`),
   KEY `id_client` (`id_client`),
   KEY `id_produit` (`id_produit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `panier`
+--
+
+INSERT INTO `panier` (`id_panier`, `id_client`, `id_produit`, `quantite`) VALUES
+(4, 1, 2, 3),
+(5, 1, 3, 2),
+(6, 1, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -145,22 +170,22 @@ CREATE TABLE IF NOT EXISTS `produit` (
 
 INSERT INTO `produit` (`id`, `nom`, `description`, `prix`, `image`, `categorie`) VALUES
 (1, 'Bague Aurore', 'Or blanc 18 carats ', 89, 'https://www.diamanta.fr/931-large_default/bague-or-blanc-aurore-diamant-078ct.jpg', 1),
-(2, 'Alliance Éclat', 'Anneau en or jaune b', 189, 'https://img.edenly.com/pt/100/atelier-20492-alliance-4-mm-or-jaune-brosse-18-carats-r__20492_1.webp', 1),
-(3, 'Solitaire Éternité', 'Diamant pur sur mont', 299, 'https://images.unsplash.com/photo-1768423685978-42fe24ec39a0?q=80&w=880&auto=format&fit=crop&ixlib=r', 1),
-(4, 'Collier Goutte', 'Pendentif cristal et', 159, 'https://images.unsplash.com/photo-1708222168881-80db18ec5982?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 2),
-(5, 'Sautoir Majesté', 'Perles de culture et', 200, 'https://www.perlesnaturelles.com/cdn/shop/products/Sautoir_Cascade_de_perles_Neige_1_1024x1024@2x.jpg?v=1763990932', 2),
-(6, 'Pendentif Cœur', 'Médaille gravée en o', 750, 'https://www.aismee.fr/bibliotheque/775/medaillon-coeur-photo-or-detail-780-1.jpg', 2),
-(7, 'Jonc Infini ', 'Bracelet rigide en o', 850, 'https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_1.0,f_auto,w_375/567', 3),
+(2, 'Alliance Éclat', 'Anneau en or jaune ', 189, 'https://img.edenly.com/pt/100/atelier-20492-alliance-4-mm-or-jaune-brosse-18-carats-r__20492_1.webp', 1),
+(3, 'Solitaire Éternité', 'Diamant pur ', 299, 'https://images.unsplash.com/photo-1768423685978-42fe24ec39a0?q=80&w=880&auto=format&fit=crop&ixlib=r', 1),
+(4, 'Collier Goutte', 'Pendentif cristal ', 159, 'https://images.unsplash.com/photo-1708222168881-80db18ec5982?q=80&w=687&auto=format&fit=crop&ixlib=r', 2),
+(5, 'Sautoir Majesté', 'Perles de culture ', 200, 'https://cdn.shopify.com/s/files/1/0978/0474/products/Sautoir_Cascade_de_perles_Neige_1.jpg?v=1763990', 2),
+(6, 'Pendentif Cœur', 'Médaille gravée ', 750, 'https://www.aismee.fr/bibliotheque/775/medaillon-coeur-photo-or-detail-780-1.jpg', 2),
+(7, 'Jonc Infini ', 'Bracelet rigide', 850, 'https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_1.0,f_auto,w_375/567', 3),
 (8, 'Manchette Royale', 'Argent ciselé', 200, 'https://images.unsplash.com/photo-1632816307542-6a707d8a1c3c?q=80&w=996&auto=format&fit=crop&ixlib=r', 3),
-(9, 'Gourmette Chic', 'Maillons larges en o', 1000, 'https://castafiore.fr/cdn/shop/products/bracelet-gourmette-grosse-maille-en-or-jaune-665974.jpg?v=16', 3),
-(10, 'Pendantes Rubis', 'Pierres précieuses s', 2, 'https://img.joomcdn.net/f1240c9214ac8c07e7ddeb367ee08e95db39915c_original.jpeg', 4),
+(9, 'Gourmette Chic', 'Maillons larges ', 1000, 'https://castafiore.fr/cdn/shop/products/bracelet-gourmette-grosse-maille-en-or-jaune-665974.jpg?v=16', 3),
+(10, 'Pendantes Rubis', 'Pierres précieuses ', 2, 'https://img.joomcdn.net/f1240c9214ac8c07e7ddeb367ee08e95db39915c_original.jpeg', 4),
 (11, 'Créoles Soleil', 'Grandes boucles doré', 200, 'https://www.delamode.fr/cdn/shop/files/boucles-d-oreilles-double-soleil-dore-martelee-5-5cm.jpg?v=17', 4),
-(12, 'Puces Étoiles', 'Petits diamants disc', 600, 'https://www.hauthentic.com/wp-content/uploads/boucle-d-oreille-diamant-0.70-carat-platine-950-H0273E', 2),
+(12, 'Puces Étoiles', 'Petits diamants ', 600, 'https://www.hauthentic.com/wp-content/uploads/boucle-d-oreille-diamant-0.70-carat-platine-950-H0273E', 2),
 (13, 'Khomsa Filigrane', 'En fils d\'argent fin', 180, 'https://lemondedivine.com/1905-large_default/collier-rayhane-main-de-fatma-en-argent-925.jpg', 2),
 (14, 'Deux colliers fins', 'Or et perles ', 500, 'https://plus.unsplash.com/premium_photo-1681276169450-4504a2442173?q=80&w=400&auto=format&fit=crop', 2),
-(15, 'Collier Argent', 'Collier croissant mo', 98, 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=400', 2),
+(15, 'Collier Argent', 'Collier croissant ', 98, 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=400', 2),
 (16, 'Bracelet Rihana', 'Perles blancs ', 40, 'https://plus.unsplash.com/premium_photo-1681276168324-a6f1958aa191?q=80&w=400&auto=format&fit=crop', 3),
-(19, 'Boucles Perles Bleu ', 'Boucles d\'oreilles d', 120, 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400', 4);
+(19, 'Boucles Perles Bleu ', 'Boucles d\'oreilles ', 120, 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400', 4);
 
 --
 -- Constraints for dumped tables

@@ -2,23 +2,20 @@
 session_start();
 require_once "config.php";
 
-// Déterminer si l'utilisateur est connecté
 $is_connected = isset($_SESSION['user']);
 $id_client = $is_connected ? $_SESSION['user']['id'] : null;
 
-// --- Prix maximum global (pour le slider) ---
 $res_max = mysqli_query($conn, "SELECT MAX(prix) as max_prix FROM produit");
 $row_max = mysqli_fetch_assoc($res_max);
-$prix_max_global = max(500, (int)$row_max['max_prix']);
-
-// --- Filtres ---
+$prix_max_global = (int)$row_max['max_prix'];
+ 
 $categorie_filtre = isset($_GET['categorie']) ? intval($_GET['categorie']) : 0;
 $prix_min = isset($_GET['prix_min']) ? max(0, intval($_GET['prix_min'])) : 0;
 $prix_max = isset($_GET['prix_max']) ? min($prix_max_global, intval($_GET['prix_max'])) : $prix_max_global;
 if ($prix_min > $prix_max) { $prix_min = 0; $prix_max = $prix_max_global; }
 
 // --- Pagination ---
-$produits_par_page = 12;
+$produits_par_page = 8;
 $page_courante = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 
 // --- Conditions SQL ---

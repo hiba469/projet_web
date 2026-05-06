@@ -38,7 +38,7 @@ if(isset($_SESSION['info']))
         border: none;
         border-radius: 20px;
         overflow: hidden;
-        max-width: 800px; /* Largeur optimale pour voir tout le formulaire */
+        max-width: 800px; 
         margin: auto;
     }
 
