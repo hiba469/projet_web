@@ -199,6 +199,12 @@ function buildUrl($overrides = []) {
         .pagination-container .btn {
             min-width: 40px;
         }
+
+        /* Badge panier */
+        .badge-panier {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -214,7 +220,12 @@ function buildUrl($overrides = []) {
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.php">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="produit.php">Collections</a></li>
-                    <li class="nav-item"><a class="nav-link" href="panier.php"><i class="bi bi-bag"></i> Panier</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="panier.php">
+                            <i class="bi bi-bag"></i> Panier
+                            <span class="badge bg-warning text-dark badge-panier" id="panier-count">0</span>
+                        </a>
+                    </li>
                     <?php if($is_connected): ?>
                         <li class="nav-item"><a class="nav-link" href="deconnexion.php">Déconnexion</a></li>
                     <?php else: ?>
@@ -378,6 +389,36 @@ function buildUrl($overrides = []) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+    // Charger le nombre de produits dans le panier au chargement de la page
+    function updatePanierCount() {
+        fetch('get_panier_count.php')
+            .then(response => response.json())
+            .then(data => {
+                const badge = document.getElementById('panier-count');
+                if (data.count > 0) {
+                    badge.textContent = data.count;
+                    badge.style.display = 'inline-block';
+                } else {
+                    badge.style.display = 'none';
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
+
+    // Mettre à jour le badge au chargement
+    document.addEventListener('DOMContentLoaded', function() {
+        updatePanierCount();
+    });
+
+    // Mettre à jour le badge lors de l'ajout au panier
+    document.querySelectorAll('form[action="ajouter_panier.php"]').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            // Pas de prévention du défaut, juste mise à jour après redirection
+            setTimeout(updatePanierCount, 500);
+        });
+    });
+
+    // Slider de prix
     (function () {
         const rangeMin    = document.getElementById('range-min');
         const rangeMax    = document.getElementById('range-max');

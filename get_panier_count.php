@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 if (!isset($_SESSION['user'])) {
     echo json_encode(['count' => 0]);
     exit;
-}
+} 
 
 $id_client = $_SESSION['user']['id'];
 $req = "SELECT SUM(quantite) AS total FROM panier WHERE id_client = $id_client";

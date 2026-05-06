@@ -111,7 +111,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link acc" href="#accueil">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="#produits">Collections</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#histoire">Notre Histoire</a></li>
+                    <li class="nav-item"><a class="nav-link" href="notrehistoire.php">Notre Histoire</a></li>
                     <li class="nav-item"><a class="nav-link" href="connexion.php">Connexion</a></li>
                 </ul>
             </div>
