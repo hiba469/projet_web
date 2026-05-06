@@ -2,13 +2,9 @@
 session_start();
 require_once "config.php";
 
-// Vérifier que l'utilisateur est connecté
-if(!isset($_SESSION['user'])) {
-    header("location:connexion.php");
-    exit;
-}
-
-$id_client = $_SESSION['user']['id'];
+// Déterminer si l'utilisateur est connecté
+$is_connected = isset($_SESSION['user']);
+$id_client = $is_connected ? $_SESSION['user']['id'] : null;
 
 // --- Prix maximum global (pour le slider) ---
 $res_max = mysqli_query($conn, "SELECT MAX(prix) as max_prix FROM produit");
@@ -219,7 +215,11 @@ function buildUrl($overrides = []) {
                     <li class="nav-item"><a class="nav-link" href="index.php">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="produit.php">Collections</a></li>
                     <li class="nav-item"><a class="nav-link" href="panier.php"><i class="bi bi-bag"></i> Panier</a></li>
-                    <li class="nav-item"><a class="nav-link" href="deconnexion.php">Déconnexion</a></li>
+                    <?php if($is_connected): ?>
+                        <li class="nav-item"><a class="nav-link" href="deconnexion.php">Déconnexion</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="connexion.php">Connexion</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -296,12 +296,19 @@ function buildUrl($overrides = []) {
                             <h5 class="card-title"><?= htmlspecialchars($produit['nom']) ?></h5>
                             <p class="card-text text-muted small"><?= htmlspecialchars(substr($produit['description'], 0, 50)) ?>...</p>
                             <p class="text-gold fw-bold fs-5"><?= number_format($produit['prix'], 0) ?> DT</p>
-                            <form method="POST" action="ajouter_panier.php">
-                                <input type="hidden" name="id_produit" value="<?= htmlspecialchars($produit['id']) ?>">
-                                <button type="submit" class="btn btn-ajouter btn-sm rounded-pill w-100">
-                                    <i class="bi bi-cart-plus"></i> Ajouter au panier
-                                </button>
-                            </form>
+                            
+                            <?php if($is_connected): ?>
+                                <form method="POST" action="ajouter_panier.php">
+                                    <input type="hidden" name="id_produit" value="<?= htmlspecialchars($produit['id']) ?>">
+                                    <button type="submit" class="btn btn-ajouter btn-sm rounded-pill w-100">
+                                        <i class="bi bi-cart-plus"></i> Ajouter au panier
+                                    </button>
+                                </form>
+                            <?php else: ?>
+                                <a href="connexion.php" class="btn btn-ajouter btn-sm rounded-pill w-100">
+                                    <i class="bi bi-box-arrow-in-right"></i> Se connecter pour ajouter
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

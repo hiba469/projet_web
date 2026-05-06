@@ -113,12 +113,6 @@
                     <li class="nav-item"><a class="nav-link" href="#produits">Collections</a></li>
                     <li class="nav-item"><a class="nav-link" href="#histoire">Notre Histoire</a></li>
                     <li class="nav-item"><a class="nav-link" href="connexion.php">Connexion</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="panier.php">
-                            <i class="bi bi-bag"></i> Panier
-                            <span class="badge bg-warning text-dark ms-2" id="panier-count">0</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -226,7 +220,7 @@
                         <li class="mb-2"><i class="bi bi-envelope me-2"></i> contact@eclat-bijoux.tn</li>
                     </ul>
                 </div>
-
+ 
                 <div class="col-md-4 mb-4">
                     <h5 class="text-gold mb-4">Paiement & RIB</h5>
                     <div class="p-3 border border-secondary rounded bg-white bg-opacity-10">
