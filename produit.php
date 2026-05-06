@@ -108,6 +108,37 @@ function buildUrl($overrides = []) {
             transform: translateY(-10px);
         }
 
+        /* --- Uniformiser les cartes produits (aligner prix/bouton) --- */
+        .product-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card .product-image {
+            height: 260px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .product-card .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-card .card-body {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-card .price-row {
+            margin-top: auto;
+        }
+
         .text-gold {
             color: var(--color-primaire);
         }
@@ -289,26 +320,32 @@ function buildUrl($overrides = []) {
         <div class="row g-4">
             <?php foreach($produits as $produit): ?>
                 <div class="col-md-3">
-                    <div class="card h-100">
-                        <img src="<?= htmlspecialchars($produit['image']) ?>" class="card-img-top p-3" alt="<?= htmlspecialchars($produit['nom']) ?>">
+                    <div class="card h-100 product-card">
+                        <div class="product-image">
+                            <img src="<?= htmlspecialchars($produit['image']) ?>" alt="<?= htmlspecialchars($produit['nom']) ?>">
+                        </div>
+
                         <div class="card-body text-center">
                             <span class="badge mb-2" style="background-color:#c5a059;color:#fff;"><?= htmlspecialchars($produit['categorie_nom']) ?></span>
                             <h5 class="card-title"><?= htmlspecialchars($produit['nom']) ?></h5>
                             <p class="card-text text-muted small"><?= htmlspecialchars(substr($produit['description'], 0, 50)) ?>...</p>
-                            <p class="text-gold fw-bold fs-5"><?= number_format($produit['prix'], 0) ?> DT</p>
-                            
-                            <?php if($is_connected): ?>
-                                <form method="POST" action="ajouter_panier.php">
-                                    <input type="hidden" name="id_produit" value="<?= htmlspecialchars($produit['id']) ?>">
-                                    <button type="submit" class="btn btn-ajouter btn-sm rounded-pill w-100">
-                                        <i class="bi bi-cart-plus"></i> Ajouter au panier
-                                    </button>
-                                </form>
-                            <?php else: ?>
-                                <a href="connexion.php" class="btn btn-ajouter btn-sm rounded-pill w-100">
-                                    <i class="bi bi-box-arrow-in-right"></i> Se connecter pour ajouter
-                                </a>
-                            <?php endif; ?>
+
+                            <div class="price-row">
+                                <p class="text-gold fw-bold fs-5 mb-3"><?= number_format($produit['prix'], 0) ?> DT</p>
+
+                                <?php if($is_connected): ?>
+                                    <form method="POST" action="ajouter_panier.php">
+                                        <input type="hidden" name="id_produit" value="<?= htmlspecialchars($produit['id']) ?>">
+                                        <button type="submit" class="btn btn-ajouter btn-sm rounded-pill w-100">
+                                            <i class="bi bi-cart-plus"></i> Ajouter au panier
+                                        </button>
+                                    </form>
+                                <?php else: ?>
+                                    <a href="connexion.php" class="btn btn-ajouter btn-sm rounded-pill w-100">
+                                        <i class="bi bi-box-arrow-in-right"></i> Se connecter pour ajouter
+                                    </a>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
