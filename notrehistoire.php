@@ -271,7 +271,7 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="index.php">Accueil</a></li>
         <li class="nav-item"><a class="nav-link" href="produit.php">Collections</a></li>
-        <li class="nav-item"><a class="nav-link active" href="histoire.php">Notre Histoire</a></li>
+        <li class="nav-item"><a class="nav-link active" href="notrehistoire.php">Notre Histoire</a></li>
         <li class="nav-item">
           <a class="nav-link" href="panier.php">
             <i class="bi bi-bag"></i> Panier
