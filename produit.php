@@ -10,8 +10,14 @@ if(!isset($_SESSION['user'])) {
 
 $id_client = $_SESSION['user']['id'];
 
-// Récupérer tous les produits
-$req = "SELECT * FROM produit";
+// Filtrage par catégorie
+$categorie_filtre = isset($_GET['categorie']) ? intval($_GET['categorie']) : 0;
+
+if ($categorie_filtre > 0) {
+    $req = "SELECT p.*, c.nom AS categorie_nom FROM produit p JOIN categorie c ON p.categorie = c.id WHERE p.categorie = $categorie_filtre";
+} else {
+    $req = "SELECT p.*, c.nom AS categorie_nom FROM produit p JOIN categorie c ON p.categorie = c.id";
+}
 $res = mysqli_query($conn, $req);
 
 if(!$res) {
@@ -19,6 +25,11 @@ if(!$res) {
 }
 
 $produits = mysqli_fetch_all($res, MYSQLI_ASSOC);
+
+// Récupérer les catégories
+$req_cats = "SELECT * FROM categorie";
+$res_cats = mysqli_query($conn, $req_cats);
+$categories = mysqli_fetch_all($res_cats, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -101,19 +112,32 @@ $produits = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
     <!-- Contenu -->
     <div class="container py-5">
-        <h1 class="mb-5">Nos Collections</h1>
+        <h1 class="mb-4">Nos Collections</h1>
+
+        <!-- Filtres par catégorie -->
+        <div class="d-flex flex-wrap gap-2 mb-5">
+            <a href="produit.php" class="btn rounded-pill <?= $categorie_filtre === 0 ? 'btn-ajouter' : 'btn-outline-secondary' ?>">
+                Tous les produits
+            </a>
+            <?php foreach($categories as $cat): ?>
+                <a href="produit.php?categorie=<?= htmlspecialchars($cat['id']) ?>" class="btn rounded-pill <?= $categorie_filtre === $cat['id'] ? 'btn-ajouter' : 'btn-outline-secondary' ?>">
+                    <?= htmlspecialchars($cat['nom']) ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
 
         <div class="row g-4">
             <?php foreach($produits as $produit): ?>
                 <div class="col-md-3">
                     <div class="card h-100">
-                        <img src="<?= $produit['image'] ?>" class="card-img-top p-3" alt="<?= $produit['nom'] ?>">
+                        <img src="<?= htmlspecialchars($produit['image']) ?>" class="card-img-top p-3" alt="<?= htmlspecialchars($produit['nom']) ?>">
                         <div class="card-body text-center">
-                            <h5 class="card-title"><?= $produit['nom'] ?></h5>
-                            <p class="card-text text-muted small"><?= substr($produit['description'], 0, 50) ?>...</p>
-                            <p class="text-gold fw-bold fs-5"><?= $produit['prix'] ?> DT</p>
+                            <span class="badge mb-2" style="background-color:#c5a059;color:#fff;"><?= htmlspecialchars($produit['categorie_nom']) ?></span>
+                            <h5 class="card-title"><?= htmlspecialchars($produit['nom']) ?></h5>
+                            <p class="card-text text-muted small"><?= htmlspecialchars(substr($produit['description'], 0, 50)) ?>...</p>
+                            <p class="text-gold fw-bold fs-5"><?= number_format($produit['prix'], 0) ?> DT</p>
                             <form method="POST" action="ajouter_panier.php">
-                                <input type="hidden" name="id_produit" value="<?= $produit['id'] ?>">
+                                <input type="hidden" name="id_produit" value="<?= htmlspecialchars($produit['id']) ?>">
                                 <button type="submit" class="btn btn-ajouter btn-sm rounded-pill w-100">
                                     <i class="bi bi-cart-plus"></i> Ajouter au panier
                                 </button>
@@ -122,6 +146,11 @@ $produits = mysqli_fetch_all($res, MYSQLI_ASSOC);
                     </div>
                 </div>
             <?php endforeach; ?>
+            <?php if(empty($produits)): ?>
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted fs-5">Aucun produit dans cette catégorie.</p>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 
