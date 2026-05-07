@@ -9,7 +9,6 @@ if (!isset($_SESSION['user'])) {
 
 $id_client = $_SESSION['user']['id'];
 
-// Handle order confirmation (POST)
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['confirmer'])) {
     // Fetch cart items
     $req_items = "SELECT p.id_produit, p.quantite, pr.prix
@@ -29,12 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['confirmer'])) {
         mysqli_begin_transaction($conn);
         $ok = true;
 
-        // Create commande
         $req_cmd = "INSERT INTO commande (id_client, date, montant) VALUES ($id_client, '$date', $montant)";
         if (!mysqli_query($conn, $req_cmd)) { $ok = false; }
         $id_commande = mysqli_insert_id($conn);
 
-        // Insert ligne_commande for each item (repeated for quantity)
         if ($ok) {
             foreach ($items as $item) {
                 for ($i = 0; $i < $item['quantite']; $i++) {
@@ -44,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['confirmer'])) {
             }
         }
 
-        // Clear the cart
         if ($ok) {
             $req_clear = "DELETE FROM panier WHERE id_client = $id_client";
             if (!mysqli_query($conn, $req_clear)) { $ok = false; }
@@ -60,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['confirmer'])) {
     }
 }
 
-// Fetch cart items for display
 $req = "SELECT p.id_panier, p.quantite, pr.nom, pr.prix, pr.image
         FROM panier p
         JOIN produit pr ON p.id_produit = pr.id
@@ -156,7 +151,7 @@ foreach ($articles as $a) {
                             <div class="flex-grow-1">
                                 <div class="fw-semibold"><?= htmlspecialchars($a['nom']) ?></div>
                                 <div class="text-muted small">Quantité : <?= $a['quantite'] ?></div>
-                            </div>
+                                </div>
                             <div class="fw-bold text-gold"><?= number_format($a['prix'] * $a['quantite'], 0) ?> DT</div>
                         </div>
                     <?php endforeach; ?>
